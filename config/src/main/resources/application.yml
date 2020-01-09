@@ -1,0 +1,36 @@
+spring:
+  application:
+    name: config
+      # rabbitmq
+  rabbitmq:
+    host: 192.168.7.80
+    port: 5672
+    username: guest
+    password: guest
+  cloud:
+    config:
+      server:
+        git:
+          #   配置远端git,如果有账户密码，可以配置username  password   basedir(本地仓库)
+          #   拉取的配置访问地址为，如下：
+          #   http://localhost:8080/order-dev.yml
+          #   {label}/{name}-{pssrofiles}.yml   其中 label:分支  name:服务名 profile：环境
+          uri: https://github.com/ZzouYu/config-repo.git
+          username: ZzouYu
+          password: a..19940805
+#          本地仓库地址
+          basedir: E:/springCloud/config/baseDir
+eureka:
+  client:
+    service-url:
+      defaultZone: http://127.0.0.1:8762/eureka/
+# 暴露接口
+#management:
+#  endpoints:
+#    web:
+#      expose: "*"
+management: # 暴露触发消息总线的地址
+  endpoints:
+    web:
+      exposure:
+        include: "*"

@@ -1,0 +1,33 @@
+spring:
+  application:
+    name: product
+  cloud:
+    config:
+      discovery:
+        enabled: true
+        service-id: CONFIG
+      profile: dev
+  zipkin:
+    base-url: http://192.168.7.80:9411/
+    sender:
+      type: web
+    #默认只发送10%的请求，全发会影响性能
+    sleuth:
+      sampler:
+        probability: 1
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8762/eureka/
+  # 配置Swagger相关信息
+  instance:
+    prefer-ip-address: true
+    instanceId: ${spring.cloud.client.ip-address}:${server.port}
+    status-page-url: http://${spring.cloud.client.ip-address}:${server.port}/swagger-ui.html
+    # ${server.port}为该服务的端口号
+#logging:
+#  level:
+#    org.springframework.cloud.openfeign: debug
+logging:
+  level:
+    org.springframework.cloud.netflix.feign: debug
